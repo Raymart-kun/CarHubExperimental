@@ -1,8 +1,10 @@
+"use server";
+
 import { fetchCars } from "@/utils";
 import { CarCard, ShowMore } from ".";
 import { getCars } from "@/lib/actions/cars.action";
 
-async function CarList({ searchParams }: any) {
+async function CarList() {
   // const allCars = await fetchCars({
   //   manufacturer: searchParams.manufacturer || '',
   //   year: searchParams.year || 2022,
@@ -10,7 +12,6 @@ async function CarList({ searchParams }: any) {
   //   limit: searchParams.limit || 10,
   //   model: searchParams.model || '',
   // })
-
   const allCars = await getCars();
   const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
 
