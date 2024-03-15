@@ -3,6 +3,7 @@
 import { connectToDB } from "../mongoose";
 import CarModel from "../model/carmodel.model";
 import Car from "../model/car.model";
+import { revalidatePath } from "next/cache";
 
 export async function getCarModels() {
   try {
@@ -20,6 +21,7 @@ export async function addCar({
   price,
   carImage,
   options,
+  path,
 }: {
   name: string;
   description: string;
@@ -28,6 +30,7 @@ export async function addCar({
   price: number;
   carImage: string;
   options: any;
+  path: string;
 }) {
   try {
     connectToDB();
@@ -54,6 +57,7 @@ export async function addCar({
     });
 
     console.log("Car Added Succesfully");
+    revalidatePath(path);
   } catch (error: any) {
     throw new Error(`Error adding Product: ${error.message}`);
   }

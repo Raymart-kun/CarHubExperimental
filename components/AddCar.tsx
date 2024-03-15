@@ -6,10 +6,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { FaAngleDown } from "react-icons/fa6";
 import { FaAngleUp } from "react-icons/fa6";
 import { FaXmark } from "react-icons/fa6";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { addCar, getCarModels } from "@/lib/actions/agent.actions";
 import { useUploadThing } from "@/lib/uploadthing";
 import { toast } from "react-toastify";
+import { revalidatePath } from "next/cache";
 
 function AddCar() {
   const [carModel, setcarModel] = useState("Select Car Model");
@@ -26,7 +27,9 @@ function AddCar() {
   const [carModelError, setcarModelError] = useState(false);
   let newcarModel = "New Car Model";
   const router = useRouter();
+  const pathname = usePathname();
   const ref = useRef<HTMLInputElement>(null);
+
   const { startUpload } = useUploadThing("media");
   const [disableBtn, setdisableBtn] = useState(false);
 
