@@ -112,6 +112,7 @@ function AddCar() {
         carModel: carModel,
         price: e.target.price.value,
         options: optionsList,
+        path: pathname,
       });
 
       setFiles([]);
